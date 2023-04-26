@@ -6,3 +6,6 @@ scipy==1.8.1
 
 # test
 pytest==7.1.2
+
+# security dependency check
+safety==2.3.5
