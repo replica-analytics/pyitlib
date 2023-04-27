@@ -29,7 +29,7 @@ jobs:
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: "3.8"
 
       - name: Install python dependencies
         run: |
@@ -62,12 +62,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Python 3.8
+      - name: Setup Python 3.8
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: "3.8"
 
-      - name: Install python dependencies
+      - name: Install Python Dependencies
         run: |
           echo $(date +"%Y-%m-%dT%T") Installing Python dependencies
           python --version
@@ -76,11 +76,11 @@ jobs:
           pip install -r requirements-test.txt
           echo $(date +"%Y-%m-%dT%T") Python dependencies installed
 
-      - name: security check
+      - name: Security Check
         run: |
           safety check -r requirements-test.txt --bare
 
-      - name: Test
+      - name: Execute Tests
         run: pytest tests
 
       - name: Build pyitlib
