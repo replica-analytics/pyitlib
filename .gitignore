@@ -4,3 +4,10 @@
 docs/_build/
 dist
 pyitlib.egg-info
+venv/
+.vscode/
+.pytest_cache/
+*__pycache__/
+.idea
+build/
+.coverage

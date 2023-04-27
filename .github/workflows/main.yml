@@ -1,0 +1,97 @@
+name: Pyitlib
+
+on:
+  push:
+    branches:
+      - master
+
+  # Run test build for any PRs
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+env:
+  location: eastus
+
+jobs:
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install python dependencies
+        run: |
+          echo $(date +"%Y-%m-%dT%T") Installing Python dependencies
+          python --version
+          python -m pip install --upgrade pip
+          export GEMFURY_PULL_TOKEN=${{secrets.GEMFURY_PULL_TOKEN}}
+          pip install -r requirements-test.txt
+          echo $(date +"%Y-%m-%dT%T") Python dependencies installed
+
+      - name: security check
+        run: |
+          safety check -r requirements-test.txt --bare
+
+      - name: Test
+        if: github.event.pull_request.draft == false
+        run: |
+          coverage run -m pytest tests
+
+  # Push image to GitHub Package Registry.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install python dependencies
+        run: |
+          echo $(date +"%Y-%m-%dT%T") Installing Python dependencies
+          python --version
+          python -m pip install --upgrade pip
+          export GEMFURY_PULL_TOKEN=${{secrets.GEMFURY_PULL_TOKEN}}
+          pip install -r requirements-test.txt
+          echo $(date +"%Y-%m-%dT%T") Python dependencies installed
+
+      - name: security check
+        run: |
+          safety check -r requirements-test.txt --bare
+
+      - name: Test
+        run: pytest tests
+
+      - name: Build pyitlib
+        run: |
+          echo $(date +"%Y-%m-%dT%T") Building pyitlib
+          hatch clean
+          python setup.py bdist_egg --exclude-source-files
+          wheel convert dist/pyitlib-*.egg -d dist
+          echo $(date +"%Y-%m-%dT%T") Built pyitlib
+
+      - name: Push To Gemfury
+        run: |
+          WHL_NAME=$(ls dist/*.whl)
+          curl  --fail-with-body -F package=@${WHL_NAME} https://${{ secrets.GEMFURY_PUSH_TOKEN }}@push.fury.io/replica-analytics/
