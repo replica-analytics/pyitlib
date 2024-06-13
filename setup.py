@@ -31,7 +31,7 @@ setup(
     install_requires=[
         'pandas<2',
         'numpy>=1.22.4,<=1.23.5',
-        'scikit-learn==1.0.2',
+        'scikit-learn==1.1.3',
         'scipy==1.10.1',
         'future>=0.16.0'
     ],
