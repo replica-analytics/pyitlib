@@ -33,7 +33,7 @@ setup(
         'numpy>=1.22.4,<=1.23.5',
         'scikit-learn==1.1.3',
         'scipy==1.10.1',
-        'future>=0.16.0'
+        'future>=1.0.0'
     ],
     keywords=['entropy', 'information theory', 'Shannon information',
               'uncertainty', 'correlation', 'statistics',
