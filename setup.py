@@ -29,11 +29,11 @@ setup(
     packages=['pyitlib', ],
     zip_safe=False,
     install_requires=[
-        'pandas<2',
-        'numpy>=1.22.4,<=1.23.5',
-        'scikit-learn==1.1.3',
-        'scipy==1.10.1',
-        'future>=0.16.0'
+        'pandas>=2.2.0',
+        'numpy>=2.0.0',
+        'scikit-learn==1.5.2',
+        'scipy==1.14.1',
+        'future>=1.0.0'
     ],
     keywords=['entropy', 'information theory', 'Shannon information',
               'uncertainty', 'correlation', 'statistics',

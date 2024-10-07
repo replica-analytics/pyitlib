@@ -147,7 +147,7 @@ NONE_REPLACEMENT = -32768
 
 def entropy_residual(X, base=2, fill_value=-1, estimator='ML',
                      Alphabet_X=None, keep_dims=False):
-    """
+    r"""
     Returns the estimated residual entropy [JaEC11] (also known as erasure
     entropy [VeWe06]) for an array X containing realisations of discrete random
     variables.
@@ -274,7 +274,7 @@ def entropy_residual(X, base=2, fill_value=-1, estimator='ML',
 
 def information_exogenous_local(X, base=2, fill_value=-1, estimator='ML',
                                 Alphabet_X=None, keep_dims=False):
-    """
+    r"""
     Returns the estimated exogenous local information [JaEC11] for an array X
     containing realisations of discrete random variables.
 
@@ -398,7 +398,7 @@ def information_enigmatic(X, base=2, fill_value=-1, estimator='ML',
                           Alphabet_X=None, keep_dims=False):
     # Note: can be negative
     # Note: equals multivariate mutual information when N=3, can test for this
-    """
+    r"""
     Returns the estimated enigmatic information [JaEC11] for an array X
     containing realisations of discrete random variables.
 
@@ -520,7 +520,7 @@ def information_enigmatic(X, base=2, fill_value=-1, estimator='ML',
 
 def information_interaction(X, base=2, fill_value=-1, estimator='ML',
                             Alphabet_X=None, keep_dims=False):
-    """
+    r"""
     Returns the estimated interaction information [JaBr03] for an array X
     containing realisations of discrete random variables.
 
@@ -692,7 +692,7 @@ def information_interaction(X, base=2, fill_value=-1, estimator='ML',
 
 def information_co(X, base=2, fill_value=-1, estimator='ML', Alphabet_X=None,
                    keep_dims=False):
-    """
+    r"""
     Returns the estimated co-information [Bell03] for an array X containing
     realisations of discrete random variables.
 
@@ -865,7 +865,7 @@ def information_co(X, base=2, fill_value=-1, estimator='ML', Alphabet_X=None,
 
 def information_binding(X, base=2, fill_value=-1, estimator='ML',
                         Alphabet_X=None, keep_dims=False):
-    """
+    r"""
     Returns the estimated binding information [AbPl12] (also known as dual
     total correlation [Han78]) for an array X containing realisations of
     discrete random variables.
@@ -1034,7 +1034,7 @@ def information_binding(X, base=2, fill_value=-1, estimator='ML',
 
 def information_multi(X, base=2, fill_value=-1, estimator='ML',
                       Alphabet_X=None, keep_dims=False):
-    """
+    r"""
     Returns the estimated multi-information [StVe98] (also known as total
     correlation [Wata60]) for an array X containing realisations of discrete
     random variables.
@@ -1384,9 +1384,9 @@ def information_mutual_conditional(X, Y, Z, cartesian_product=False, base=2,
     if not cartesian_product:
         I = np.empty(X.shape[:-1])
         if I.ndim > 0:
-            I[:] = np.NaN
+            I[:] = np.nan
         else:
-            I = np.float64(np.NaN)
+            I = np.float64(np.nan)
     else:
         shapeI_Z = Z.shape[:-1]
         Z = np.reshape(Z, (-1, Z.shape[-1]))
@@ -1660,9 +1660,9 @@ def information_lautum(X, Y=None, cartesian_product=False, base=2,
     if not cartesian_product:
         H = np.empty(X.shape[:-1])
         if H.ndim > 0:
-            H[:] = np.NaN
+            H[:] = np.nan
         else:
-            H = np.float64(np.NaN)
+            H = np.float64(np.nan)
     else:
         def f(X, Y, Alphabet_X, Alphabet_Y):
             return information_lautum(X, Y, False, base, fill_value, estimator,
@@ -1753,7 +1753,7 @@ def information_mutual_normalised(X, Y=None, norm_factor='Y',
                                   Alphabet_Y=None, keep_dims=False):
     # TODO Documentation should include properties for each of the
     # normalisation factors
-    """
+    r"""
     Returns the normalised mutual information between arrays X and Y, each
     containing discrete random variable realisations.
 
@@ -2045,9 +2045,9 @@ def information_mutual_normalised(X, Y=None, norm_factor='Y',
         if not cartesian_product:
             H = np.empty(X.shape[:-1])
             if H.ndim > 0:
-                H[:] = np.NaN
+                H[:] = np.nan
             else:
-                H = np.float64(np.NaN)
+                H = np.float64(np.nan)
 
             # Re-shape H and X, so that we may handle multi-dimensional arrays
             # equivalently and iterate across 0th axis
@@ -2614,9 +2614,9 @@ def entropy_cross(X, Y=None, cartesian_product=False, base=2, fill_value=-1,
     if not cartesian_product:
         H = np.empty(X.shape[:-1])
         if H.ndim > 0:
-            H[:] = np.NaN
+            H[:] = np.nan
         else:
-            H = np.float64(np.NaN)
+            H = np.float64(np.nan)
     else:
         def f(X, Y, Alphabet_X, Alphabet_Y):
             return entropy_cross(X, Y, False, base, fill_value, estimator,
@@ -3044,9 +3044,9 @@ def divergence_jensenshannon(X, Y=None, cartesian_product=False, base=2,
     if not cartesian_product:
         H = np.empty(X.shape[:-1])
         if H.ndim > 0:
-            H[:] = np.NaN
+            H[:] = np.nan
         else:
-            H = np.float64(np.NaN)
+            H = np.float64(np.nan)
     else:
         def f(X, Y, Alphabet_X, Alphabet_Y):
             return divergence_jensenshannon(X, Y, False, base, fill_value,
@@ -3498,9 +3498,9 @@ def entropy_conditional(X, Y=None, cartesian_product=False, base=2,
     if not cartesian_product:
         H = np.empty(X.shape[:-1])
         if H.ndim > 0:
-            H[:] = np.NaN
+            H[:] = np.nan
         else:
-            H = np.float64(np.NaN)
+            H = np.float64(np.nan)
     else:
         def f(X, Y, Alphabet_X, Alphabet_Y):
             return entropy_conditional(X, Y, False, base, fill_value,
@@ -3534,7 +3534,7 @@ def entropy_conditional(X, Y=None, cartesian_product=False, base=2,
 
 def entropy_joint(X, base=2, fill_value=-1, estimator='ML', Alphabet_X=None,
                   keep_dims=False):
-    """
+    r"""
     Returns the estimated joint entropy (see e.g. [CoTh06]) for an array X
     containing realisations of discrete random variables.
 
@@ -3701,7 +3701,7 @@ def entropy_joint(X, base=2, fill_value=-1, estimator='ML', Alphabet_X=None,
         n_additional_empty_bins = 0
     L, _ = _remove_counts_at_fill_value(L, alphabet_X, fill_value)
     if not np.any(L):
-        return np.float64(np.NaN)
+        return np.float64(np.nan)
 
     # P_0 is the probability mass assigned to each additional empty bin
     P, P_0 = _estimate_probabilities(L, estimator, n_additional_empty_bins)
@@ -3847,9 +3847,9 @@ def entropy(X, base=2, fill_value=-1, estimator='ML', Alphabet_X=None,
 
     H = np.empty(X.shape[:-1])
     if H.ndim > 0:
-        H[:] = np.NaN
+        H[:] = np.nan
     else:
-        H = np.float64(np.NaN)
+        H = np.float64(np.nan)
 
     # Re-shape H and X, so that we may handle multi-dimensional arrays
     # equivalently and iterate across 0th axis
@@ -4440,9 +4440,9 @@ def _cartesian_product_apply(X, Y, function, Alphabet_X=None, Alphabet_Y=None):
 
     H = np.empty(np.append(X.shape[:-1], Y.shape[:-1]).astype('int'))
     if H.ndim > 0:
-        H[:] = np.NaN
+        H[:] = np.nan
     else:
-        H = np.float64(np.NaN)
+        H = np.float64(np.nan)
 
     X = np.reshape(X, (-1, X.shape[-1]))
     Y = np.reshape(Y, (-1, Y.shape[-1]))
@@ -4707,7 +4707,7 @@ def _remove_counts_at_fill_value(Counts, Alphabet, fill_value):
 def _sanitise_array_input(X, fill_value=-1):
     # Avoid Python 3 issues with numpy arrays containing None elements
     if np.any(np.equal(X, None)) or fill_value is None:
-        X = np.array(X, copy=False)
+        X = np.array(X, copy=True)
         assert(np.all(X != NONE_REPLACEMENT))
         M = np.equal(X, None)
         X = np.where(M, NONE_REPLACEMENT, X)
@@ -4744,7 +4744,7 @@ def _sanitise_array_input(X, fill_value=-1):
         else:
             X = X.filled()
     else:
-        X = np.array(X, copy=False)
+        X = np.array(X, copy=True)
 
     if X.dtype.kind not in 'biufcmMOSUV':
         raise TypeError("Unsupported array dtype")
