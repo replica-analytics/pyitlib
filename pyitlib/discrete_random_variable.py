@@ -2680,8 +2680,8 @@ def entropy_cross(X, Y=None, cartesian_product=False, base=2, fill_value=-1,
         Alphabet = np.union1d(alphabet_X, alphabet_Y)
         P = np.zeros_like(Alphabet, dtype=P1.dtype)
         Q = np.zeros_like(Alphabet, dtype=P2.dtype)
-        P[np.in1d(Alphabet, alphabet_X, assume_unique=True)] = P1
-        Q[np.in1d(Alphabet, alphabet_Y, assume_unique=True)] = P2
+        P[np.isin(Alphabet, alphabet_X, assume_unique=True)] = P1
+        Q[np.isin(Alphabet, alphabet_Y, assume_unique=True)] = P2
 
         H[i] = entropy_cross_pmf(P, Q, False, base)
 
@@ -3110,8 +3110,8 @@ def divergence_jensenshannon(X, Y=None, cartesian_product=False, base=2,
         Alphabet = np.union1d(alphabet_X, alphabet_Y)
         P = np.zeros_like(Alphabet, dtype=P1.dtype)
         Q = np.zeros_like(Alphabet, dtype=P2.dtype)
-        P[np.in1d(Alphabet, alphabet_X, assume_unique=True)] = P1
-        Q[np.in1d(Alphabet, alphabet_Y, assume_unique=True)] = P2
+        P[np.isin(Alphabet, alphabet_X, assume_unique=True)] = P1
+        Q[np.isin(Alphabet, alphabet_Y, assume_unique=True)] = P2
 
         H[i] = entropy_pmf(0.5*P + 0.5*Q, base) - \
             0.5*entropy_pmf(P, base) - 0.5*entropy_pmf(Q, base)
@@ -4707,7 +4707,7 @@ def _remove_counts_at_fill_value(Counts, Alphabet, fill_value):
 def _sanitise_array_input(X, fill_value=-1):
     # Avoid Python 3 issues with numpy arrays containing None elements
     if np.any(np.equal(X, None)) or fill_value is None:
-        X = np.array(X, copy=True)
+        X = np.asarray(X)
         assert(np.all(X != NONE_REPLACEMENT))
         M = np.equal(X, None)
         X = np.where(M, NONE_REPLACEMENT, X)
@@ -4744,7 +4744,7 @@ def _sanitise_array_input(X, fill_value=-1):
         else:
             X = X.filled()
     else:
-        X = np.array(X, copy=True)
+        X = np.asarray(X)
 
     if X.dtype.kind not in 'biufcmMOSUV':
         raise TypeError("Unsupported array dtype")
