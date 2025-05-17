@@ -32,7 +32,7 @@ setup(
         'pandas>=2.2.0',
         'numpy>=2.0.0',
         'scikit-learn==1.5.2',
-        'scipy==1.14.1',
+        'scipy==1.15.2',
         'future>=1.0.0'
     ],
     keywords=['entropy', 'information theory', 'Shannon information',

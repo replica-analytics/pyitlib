@@ -12,3 +12,4 @@ build/
 .idea/
 .coverage
 check_pr_ready.sh
+.DS_Store
